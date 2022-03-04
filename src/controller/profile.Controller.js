@@ -22,4 +22,9 @@ router.post('/', imageUpload.single('image'), async(req, res) => {
     res.status(400).send({ error: error.message })
 })
 
+router.get("/",async(req,res)=>{
+  const profile = await Profile.find().lean().exec();
+  return res.status(200).json(profile)
+})
+
 module.exports =router;
