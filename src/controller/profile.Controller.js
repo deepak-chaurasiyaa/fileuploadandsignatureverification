@@ -8,8 +8,14 @@ app.use(express.json());
 const Profile=require("../models/profile.model")
 const imageUpload = require("../utils/file-upload")
 router.post('/', imageUpload.single('image'), async(req, res) => {
-  const profile = await Profile.create(req.body);
-    // res.send(req.file)
+  // console.log(req.body,"hjdfd")
+  const profile = await Profile.create({
+    name:req.body.name,
+    image:req.file.path
+
+  })
+
+    res.send(profile)
     res.send("hi")
 }, (error, req, res, next) => {
     console.log("hi i am an error");
